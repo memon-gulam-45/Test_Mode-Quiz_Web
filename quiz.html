@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" id="root" class="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Mode | Quiz</title>
+    <script>
+      if (localStorage.getItem("mode") === "dark") {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
+    <link rel="stylesheet" href="./output.css" />
+    <link rel="icon" href="./Images/Round-Logo.png" type="image/png" />
+  </head>
+  <body
+    class="bg-white text-black dark:bg-gray-950 dark:text-white font-sans h-screen w-screen m-0 p-0 flex flex-col justify-evenly items-center"
+  >
+    <div class="h-2/12 w-full flex flex-col justify-evenly items-center">
+      <h2
+        class="text-5xl max-lg:text-5xl mb-4 max-md:text-4xl text-center font-bold"
+      >
+        Test Mode - Quiz
+      </h2>
+      <p
+        class="text-2xl mb-2 max-lg:text-xl max-md:text-lg text-center font-semibold"
+      >
+        X Question Out Of Y
+      </p>
+      <p
+        class="text-xl mb-2 max-lg:text-lg max-md:text-sm text-center font-medium"
+        id="timer"
+      >
+        Quiz Strated...
+      </p>
+    </div>
+
+    <div
+      class="h-9/12 w-4/12 max-xl:w-5/12 max-lg:w-8/12 max-md:w-8/12 max-sm:w-9/12 rounded-2xl shadow-[0_2px_20px] shadow-blue-900 dark:shadow-blue-400 flex flex-col justify-center items-center"
+    >
+      <h3 class="text-3xl font-bold self-start ml-12" id="question">
+        Question
+      </h3>
+
+      <div class="h-9/12 mt-4 w-full flex flex-col justify-evenly items-center">
+        <button
+          type="button"
+          id="option-a"
+          data-option="A"
+          class="w-10/12 text-left text-black dark:text-white rounded-xl outline-none font-medium mt-4 text-lg p-4 bg-transparent hover:bg-gray-100 dark:hover:bg-gray-900 shadow-[0_0_4px] shadow-blue-800 dark:shadow-blue-400 hover:shadow-[0_2px_6px] active:scale-98 active:shadow-[0_-1px_5px] transition duration-200 ease-in-outrounded-xl cursor-pointer"
+        >
+          A : Option A
+        </button>
+        <button
+          type="button"
+          id="option-b"
+          data-option="B"
+          class="w-10/12 text-left text-black dark:text-white rounded-xl outline-none font-medium mt-4 text-lg p-4 bg-transparent hover:bg-gray-100 dark:hover:bg-gray-900 shadow-[0_0_4px] shadow-blue-800 dark:shadow-blue-400 hover:shadow-[0_2px_6px] active:scale-98 active:shadow-[0_-1px_5px] transition duration-200 ease-in-outrounded-xl cursor-pointer"
+        >
+          B : Option B
+        </button>
+        <button
+          type="button"
+          id="option-c"
+          data-option="C"
+          class="w-10/12 text-left text-black dark:text-white rounded-xl outline-none font-medium mt-4 text-lg p-4 bg-transparent hover:bg-gray-100 dark:hover:bg-gray-900 shadow-[0_0_4px] shadow-blue-800 dark:shadow-blue-400 hover:shadow-[0_2px_6px] active:scale-98 active:shadow-[0_-1px_5px] transition duration-200 ease-in-outrounded-xl cursor-pointer"
+        >
+          C : Option C
+        </button>
+        <button
+          type="button"
+          id="option-d"
+          data-option="D"
+          class="w-10/12 text-left text-black dark:text-white rounded-xl outline-none font-medium mt-4 text-lg p-4 bg-transparent hover:bg-gray-100 dark:hover:bg-gray-900 shadow-[0_0_4px] shadow-blue-800 dark:shadow-blue-400 hover:shadow-[0_2px_6px] active:scale-98 active:shadow-[0_-1px_5px] transition duration-200 ease-in-outrounded-xl cursor-pointer"
+        >
+          D : Option D
+        </button>
+
+        <div class="w-full flex justify-evenly items-center">
+          <button
+            type="button"
+            class="w-4/12 text-center text-black dark:text-white rounded-xl outline-none font-medium mt-4 text-lg p-4 bg-transparent shadow-[0_2px_10px] shadow-blue-800 dark:shadow-blue-400 hover:shadow-[0_4px_12px] hover:scale-101 active:scale-98 active:shadow-[0_1px_4px] transition duration-200 ease-in-outrounded-xl cursor-pointer"
+          >
+            Previous
+          </button>
+          <button
+            type="button"
+            id="next-btn"
+            class="w-4/12 text-center text-black dark:text-white rounded-xl outline-none font-medium mt-4 text-lg p-4 bg-transparent shadow-[0_2px_10px] shadow-blue-800 dark:shadow-blue-400 hover:shadow-[0_4px_12px] hover:scale-101 active:scale-98 active:shadow-[0_1px_4px] transition duration-200 ease-in-outrounded-xl cursor-pointer"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="./quiz.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>

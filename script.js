@@ -8,12 +8,25 @@ let toggleBtn = document.querySelector("#toggle-button");
 
 let root = document.querySelector("#root");
 
+let form = document.querySelector("form");
+let username = document.querySelector("#username");
+let password = document.querySelector("#password");
+let invalidMsg = document.querySelector("#invalid-msg");
+
 startBtn.addEventListener("click", () => {
   welcomePart.classList.add("hidden");
   loginPart.classList.remove("hidden");
 });
 
-let mode = root.classList.contains("dark") ? "dark" : "light";
+let mode =
+  localStorage.getItem("mode") ||
+  (root.classList.contains("dark") ? "dark" : "light");
+
+if (mode === "dark") {
+  root.classList.add("dark");
+} else {
+  root.classList.remove("dark");
+}
 updateIcons();
 
 toggleBtn.addEventListener("click", () => {
@@ -31,6 +44,7 @@ function updateMode() {
   } else {
     root.classList.add("dark");
   }
+  localStorage.setItem("mode", mode);
   updateIcons();
   console.log(mode);
 }
@@ -44,3 +58,16 @@ function updateIcons() {
     light.classList.add("hidden");
   }
 }
+
+form.addEventListener("submit", (e) => {
+  if (username.value === "memon_gulam_45" && password.value === "ghm0405") {
+    invalidMsg.classList.add("hidden");
+    console.log("Succesful");
+
+    form.setAttribute("action", "quiz.html");
+  } else {
+    e.preventDefault();
+    invalidMsg.classList.remove("hidden");
+    invalidMsg.innerText = "Invalid Credentials";
+  }
+});
