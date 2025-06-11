@@ -60,13 +60,13 @@ function updateIcons() {
 }
 
 form.addEventListener("submit", (e) => {
+  e.preventDefault();
   if (username.value === "memon_gulam_45" && password.value === "ghm0405") {
     invalidMsg.classList.add("hidden");
     console.log("Succesful");
 
-    form.setAttribute("action", "quiz.html");
+    window.location.href = "./quiz.html";
   } else {
-    e.preventDefault();
     invalidMsg.classList.remove("hidden");
     invalidMsg.innerText = "Invalid Credentials";
   }
