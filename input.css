@@ -1,8 +1,2 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
-
-@layer components {
-  .text-myshadow {
-    @apply text-shadow-md text-shadow-blue-200 dark:text-shadow-blue-800;
-  }
-}

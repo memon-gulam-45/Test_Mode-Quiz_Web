@@ -6,7 +6,7 @@
     <title>Test Mode | Quiz</title>
     <script>
       if (localStorage.getItem("mode") === "dark") {
-        document.documentElement.classList.add("dark");
+        document.querySelector("html").classList.add("dark");
       }
     </script>
     <link rel="stylesheet" href="./output.css" />
@@ -23,8 +23,9 @@
       </h2>
       <p
         class="text-2xl mb-2 max-lg:text-xl max-md:text-lg text-center font-semibold"
+        id="display-ques-no"
       >
-        X Question Out Of Y
+        Question 1 Of 10
       </p>
       <p
         class="text-xl mb-2 max-lg:text-lg max-md:text-sm text-center font-medium"
@@ -35,18 +36,22 @@
     </div>
 
     <div
-      class="h-9/12 w-4/12 max-xl:w-5/12 max-lg:w-8/12 max-md:w-8/12 max-sm:w-9/12 rounded-2xl shadow-[0_2px_20px] shadow-blue-900 dark:shadow-blue-400 flex flex-col justify-center items-center"
+      class="h-8/12 w-4/12 max-xl:w-5/12 max-lg:w-8/12 max-md:w-8/12 max-sm:w-9/12 rounded-2xl shadow-[0_2px_20px] shadow-blue-900 dark:shadow-blue-400 flex flex-col justify-center items-center"
     >
-      <h3 class="text-3xl font-bold self-start ml-12" id="question">
-        Question
-      </h3>
+      <div class="flex justify-center items-center">
+        <h3 class="text-2xl max-md:text-xl p-4 font-bold" id="question">
+          Question
+        </h3>
+      </div>
 
-      <div class="h-9/12 mt-4 w-full flex flex-col justify-evenly items-center">
+      <form
+        class="h-9/12 mt-4 w-full flex flex-col justify-evenly items-center"
+      >
         <button
           type="button"
           id="option-a"
           data-option="A"
-          class="w-10/12 text-left text-black dark:text-white rounded-xl outline-none font-medium mt-4 text-lg p-4 bg-transparent hover:bg-gray-100 dark:hover:bg-gray-900 shadow-[0_0_4px] shadow-blue-800 dark:shadow-blue-400 hover:shadow-[0_2px_6px] active:scale-98 active:shadow-[0_-1px_5px] transition duration-200 ease-in-outrounded-xl cursor-pointer"
+          class="w-10/12 text-left text-black dark:text-white rounded-lg outline-none font-normal text-lg max-md:text-sm p-3 bg-transparent hover:bg-gray-100 dark:hover:bg-gray-900 shadow-[0_0_4px] shadow-blue-800 dark:shadow-blue-400 hover:shadow-[0_2px_6px] active:scale-98 active:shadow-[0_-1px_5px] transition duration-200 ease-in-outrounded-xl cursor-pointer"
         >
           A : Option A
         </button>
@@ -54,7 +59,7 @@
           type="button"
           id="option-b"
           data-option="B"
-          class="w-10/12 text-left text-black dark:text-white rounded-xl outline-none font-medium mt-4 text-lg p-4 bg-transparent hover:bg-gray-100 dark:hover:bg-gray-900 shadow-[0_0_4px] shadow-blue-800 dark:shadow-blue-400 hover:shadow-[0_2px_6px] active:scale-98 active:shadow-[0_-1px_5px] transition duration-200 ease-in-outrounded-xl cursor-pointer"
+          class="w-10/12 text-left text-black dark:text-white rounded-lg outline-none font-normal text-lg max-md:text-sm p-3 bg-transparent hover:bg-gray-100 dark:hover:bg-gray-900 shadow-[0_0_4px] shadow-blue-800 dark:shadow-blue-400 hover:shadow-[0_2px_6px] active:scale-98 active:shadow-[0_-1px_5px] transition duration-200 ease-in-outrounded-xl cursor-pointer"
         >
           B : Option B
         </button>
@@ -62,7 +67,7 @@
           type="button"
           id="option-c"
           data-option="C"
-          class="w-10/12 text-left text-black dark:text-white rounded-xl outline-none font-medium mt-4 text-lg p-4 bg-transparent hover:bg-gray-100 dark:hover:bg-gray-900 shadow-[0_0_4px] shadow-blue-800 dark:shadow-blue-400 hover:shadow-[0_2px_6px] active:scale-98 active:shadow-[0_-1px_5px] transition duration-200 ease-in-outrounded-xl cursor-pointer"
+          class="w-10/12 text-left text-black dark:text-white rounded-lg outline-none font-normal text-lg max-md:text-sm p-3 bg-transparent hover:bg-gray-100 dark:hover:bg-gray-900 shadow-[0_0_4px] shadow-blue-800 dark:shadow-blue-400 hover:shadow-[0_2px_6px] active:scale-98 active:shadow-[0_-1px_5px] transition duration-200 ease-in-outrounded-xl cursor-pointer"
         >
           C : Option C
         </button>
@@ -70,7 +75,7 @@
           type="button"
           id="option-d"
           data-option="D"
-          class="w-10/12 text-left text-black dark:text-white rounded-xl outline-none font-medium mt-4 text-lg p-4 bg-transparent hover:bg-gray-100 dark:hover:bg-gray-900 shadow-[0_0_4px] shadow-blue-800 dark:shadow-blue-400 hover:shadow-[0_2px_6px] active:scale-98 active:shadow-[0_-1px_5px] transition duration-200 ease-in-outrounded-xl cursor-pointer"
+          class="w-10/12 text-left text-black dark:text-white rounded-lg outline-none font-normal text-lg max-md:text-sm p-3 bg-transparent hover:bg-gray-100 dark:hover:bg-gray-900 shadow-[0_0_4px] shadow-blue-800 dark:shadow-blue-400 hover:shadow-[0_2px_6px] active:scale-98 active:shadow-[0_-1px_5px] transition duration-200 ease-in-outrounded-xl cursor-pointer"
         >
           D : Option D
         </button>
@@ -78,21 +83,28 @@
         <div class="w-full flex justify-evenly items-center">
           <button
             type="button"
-            class="w-4/12 text-center text-black dark:text-white rounded-xl outline-none font-medium mt-4 text-lg p-4 bg-transparent shadow-[0_2px_10px] shadow-blue-800 dark:shadow-blue-400 hover:shadow-[0_4px_12px] hover:scale-101 active:scale-98 active:shadow-[0_1px_4px] transition duration-200 ease-in-outrounded-xl cursor-pointer"
+            id="previous-btn"
+            class="w-4/12 text-center text-black dark:text-white rounded-xl outline-none font-medium mt-4 text-lg max-md:text-sm p-4 bg-transparent shadow-[0_2px_10px] shadow-blue-800 dark:shadow-blue-400 hover:shadow-[0_4px_12px] hover:scale-101 active:scale-98 active:shadow-[0_1px_4px] transition duration-200 ease-in-outrounded-xl cursor-pointer"
           >
             Previous
           </button>
           <button
             type="button"
             id="next-btn"
-            class="w-4/12 text-center text-black dark:text-white rounded-xl outline-none font-medium mt-4 text-lg p-4 bg-transparent shadow-[0_2px_10px] shadow-blue-800 dark:shadow-blue-400 hover:shadow-[0_4px_12px] hover:scale-101 active:scale-98 active:shadow-[0_1px_4px] transition duration-200 ease-in-outrounded-xl cursor-pointer"
+            class="w-4/12 text-center text-black dark:text-white rounded-xl outline-none font-medium mt-4 text-lg max-md:text-sm p-4 bg-transparent shadow-[0_2px_10px] shadow-blue-800 dark:shadow-blue-400 hover:shadow-[0_4px_12px] hover:scale-101 active:scale-98 active:shadow-[0_1px_4px] transition duration-200 ease-in-outrounded-xl cursor-pointer"
           >
             Next
           </button>
+          <button
+            type="submit"
+            id="submit-btn"
+            class="hidden w-4/12 text-center text-black dark:text-white rounded-xl outline-none font-medium mt-4 text-lg max-md:text-sm p-4 bg-transparent shadow-[0_2px_10px] shadow-blue-800 dark:shadow-blue-400 hover:shadow-[0_4px_12px] hover:scale-101 active:scale-98 active:shadow-[0_1px_4px] transition duration-200 ease-in-outrounded-xl cursor-pointer"
+          >
+            Submit
+          </button>
         </div>
-      </div>
+      </form>
     </div>
     <script src="./quiz.js"></script>
-    <script src="./script.js"></script>
   </body>
 </html>

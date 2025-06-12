@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" id="root" class="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Mode | Quiz</title>
+    <script>
+      if (localStorage.getItem("mode") === "dark") {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
+    <link rel="stylesheet" href="./output.css" />
+    <link rel="icon" href="./Images/Round-Logo.png" type="image/png" />
+  </head>
+  <body
+    class="bg-white text-black dark:bg-gray-950 dark:text-white font-sans h-screen w-screen m-0 p-0 flex flex-col justify-evenly items-center"
+  >
+    <h2
+      class="text-5xl max-lg:text-5xl mb-4 max-md:text-4xl text-center font-bold"
+    >
+      Test Mode - Quiz
+    </h2>
+
+    <p
+      class="text-3xl max-lg:text-3xl mb-4 max-md:text-2xl text-center font-semibold"
+      id="display-score"
+    >
+      You Scored X Out Of Y...
+    </p>
+
+    <script>
+      let score = localStorage.getItem("score");
+      let totalQues = localStorage.getItem("totalQues");
+      let displayScore = document.querySelector("#display-score");
+
+      displayScore.innerText = `You Scored ${score} Out Of ${totalQues}...`;
+    </script>
+  </body>
+</html>
