@@ -4,12 +4,9 @@ Test Mode is a responsive aptitude quiz web application built using **HTML**, **
 
 ---
 
-
 ## 🌐 Live Demo
 
-Click here to try the app:  
-👉 https://testmode-quizweb.vercel.app/
-
+<a href="https://testmode-quizweb.vercel.app/" target="_blank">Click here to try the app</a>
 
 ---
 
@@ -65,7 +62,6 @@ Test Mode - Quiz Web/
 2. **Start Quiz** — Switches to login screen
 3. **Theme Toggle** — Dark/Light mode with icon swap
 4. **Login Screen** — Basic UI (logic WIP)
-   
 
 ---
 
