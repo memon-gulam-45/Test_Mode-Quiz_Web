@@ -201,7 +201,9 @@ window.onload = function () {
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   sessionStorage.removeItem("quizProgress");
-  localStorage.removeItem("quizStarted");
+  if (localStorage.getItem("quizStarted") === "true") {
+    localStorage.removeItem("quizStarted");
+  }
   localStorage.setItem("quizFinished", "true");
   localStorage.setItem("score", score);
   localStorage.setItem("totalQues", questions.length);
