@@ -16,8 +16,7 @@ let invalidMsg = document.querySelector("#invalid-msg");
 startBtn.addEventListener("click", () => {
   welcomePart.classList.add("hidden");
   loginPart.classList.remove("hidden");
-  if (localStorage.getItem("quizFinished") === "true")
-    localStorage.removeItem("quizFinished");
+  localStorage.removeItem("quizFinished");
 });
 
 let mode =
