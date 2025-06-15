@@ -197,6 +197,7 @@ function saveProgress() {
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+  timeLeft = 0;
   handleForm();
 });
 
