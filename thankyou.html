@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" id="root" class="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Mode | Quiz</title>
+    <script>
+      if (localStorage.getItem("mode") === "dark") {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
+    <link rel="stylesheet" href="./output.css" />
+    <link rel="icon" href="./Images/Round-Logo.png" type="image/png" />
+  </head>
+  <body
+    class="bg-white text-black dark:bg-gray-950 dark:text-white font-sans h-screen w-screen flex flex-col justify-evenly items-center"
+  >
+    <header>
+      <h2
+        class="h-2/12 w-full text-5xl p-4 max-lg:text-5xl mb-4 max-md:text-4xl text-center font-bold"
+      >
+        Thank You for Completing the Quiz
+      </h2>
+    </header>
+
+    <main class="h-8/12 w-7/12 max-md:w-10/12">
+      <div
+        class="h-full w-full rounded-2xl flex flex-col justify-center items-center bg-transparent shadow-[0_2px_20px] shadow-blue-900 dark:shadow-blue-400"
+      >
+        <p
+          class="text-2xl p-8 max-lg:text-2xl max-md:text-xl text-center font-semibold"
+        >
+          Thank you for completing the quiz! Your responses have been
+          successfully submitted, and our team will review them shortly. You
+          will be notified via WhatsApp or Gmail with the next steps.
+        </p>
+
+        <button
+          type="button"
+          id="home"
+          class="text-center mt-4 text-black dark:text-white outline-none font-medium p-4 text-lg max-md:text-sm bg-transparent shadow-[0_2px_10px] shadow-blue-800 dark:shadow-blue-400 hover:shadow-[0_4px_12px] hover:scale-101 active:scale-98 active:shadow-[0_1px_4px] transition duration-200 ease-in-out rounded-xl cursor-pointer"
+        >
+          Go Back to Home
+        </button>
+      </div>
+    </main>
+
+    <script>
+      let home = document.querySelector("#home");
+      home.addEventListener("click", () => {
+        window.location.href = "index.html";
+
+        localStorage.removeItem("quizProgress");
+        localStorage.removeItem("quizFinished");
+        localStorage.removeItem("mode");
+        localStorage.removeItem("score");
+        localStorage.removeItem("totalQues");
+      });
+    </script>
+  </body>
+</html>

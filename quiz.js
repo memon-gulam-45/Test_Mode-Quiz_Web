@@ -1,5 +1,5 @@
 let displayQuesNo = document.querySelector("#display-ques-no");
-let timeLeft = 1200;
+let timeLeft = 30;
 
 function startTimer() {
   const timerDisplay = document.querySelector("#timer");
@@ -18,10 +18,10 @@ function startTimer() {
     timeLeft--;
     saveProgress();
 
-    if (timeLeft < 0) {
+    if (timeLeft <= 0) {
       clearInterval(countDown);
-      timerDisplay.innerText = "Time's Up!";
-      sessionStorage.removeItem("quizProgress");
+      alert("Time's Up!, Your Quiz Is Submitted");
+      handleForm();
     }
   }, 1000);
 }
@@ -36,43 +36,61 @@ let nextBtn = document.querySelector("#next-btn");
 let submitBtn = document.querySelector("#submit-btn");
 let form = document.querySelector("form");
 
-let questions;
-const savedData = JSON.parse(sessionStorage.getItem("quizProgress"));
+import { db } from "./firebase-config.js";
+import {
+  collection,
+  getDocs,
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 
-if (savedData && savedData.questions) {
-  questions = savedData.questions;
-} else {
-  questions = [
-    {
-      question: "What is the capital of India?",
-      options: {
-        A: "Mumbai",
-        B: "Delhi",
-        C: "Ahmedabad",
-        D: "Kolkata",
-      },
-      answer: "B",
-    },
-
-    {
-      question: "What is the national sport of India?",
-      options: {
-        A: "Cricket",
-        B: "Volley Ball",
-        C: "Foot Ball",
-        D: "Hockey",
-      },
-      answer: "D",
-    },
-  ];
-  questions.sort(() => Math.random() - 0.5);
-}
-
+let questions = [];
 const options = [optA, optB, optC, optD];
 let currIndex = 0;
-let answeredQues = new Array(questions.length).fill(false);
+let answeredQues = [];
+let score = 0;
 
-displayQuesNo.innerText = `Question ${currIndex + 1} Of ${questions.length}`;
+async function fetchQuestions() {
+  const querySnapshot = await getDocs(collection(db, "questions"));
+  querySnapshot.forEach((ques) => {
+    questions.push(ques.data());
+  });
+
+  questions.sort(() => Math.random() - 0.5);
+
+  answeredQues = new Array(questions.length).fill("false");
+
+  displayQuesNo.innerText = `Question ${currIndex + 1} Of ${questions.length}`;
+
+  startTimer();
+  showQuestion();
+}
+
+window.onload = function () {
+  if (localStorage.getItem("quizFinished") === "true") {
+    alert("You've Already Submitted The Quiz...");
+    window.location.href = "thankyou.html";
+    return;
+  }
+
+  const savedProgress = JSON.parse(localStorage.getItem("quizProgress"));
+
+  if (savedProgress && savedProgress.questions) {
+    currIndex = savedProgress.currIndex || 0;
+    score = savedProgress.score || 0;
+    timeLeft = savedProgress.timeLeft || 30;
+    questions = savedProgress.questions || questions;
+    answeredQues =
+      savedProgress.answeredQues || new Array(questions.length).fill("false");
+
+    displayQuesNo.innerText = `Question ${currIndex + 1} Of ${
+      questions.length
+    }`;
+    startTimer();
+  } else {
+    fetchQuestions();
+  }
+};
+
+const savedData = JSON.parse(localStorage.getItem("quizProgress"));
 
 function showQuestion() {
   let q = questions[currIndex];
@@ -87,14 +105,12 @@ function showQuestion() {
     previousBtn.disabled = true;
   }
 
-  if (answeredQues[currIndex] === true) {
+  if (answeredQues[currIndex] === "true") {
     disableOptions();
   } else {
     enableOptions();
   }
 }
-
-showQuestion();
 
 nextBtn.addEventListener("click", handleNext);
 
@@ -145,7 +161,6 @@ function handlePrevious() {
   saveProgress();
 }
 
-let score = 0;
 function optionClick(selectedOption) {
   disableOptions();
   let correct = questions[currIndex].answer;
@@ -158,7 +173,7 @@ function optionClick(selectedOption) {
     console.log(score);
   }
 
-  answeredQues[currIndex] = true;
+  answeredQues[currIndex] = "true";
   if (currIndex < questions.length - 1) {
     handleNext();
   }
@@ -173,41 +188,21 @@ function saveProgress() {
     answeredQues,
     questions,
   };
-  sessionStorage.setItem("quizProgress", JSON.stringify(quizState));
+  localStorage.setItem("quizProgress", JSON.stringify(quizState));
 }
-
-window.onload = function () {
-  if (localStorage.getItem("quizFinished")) {
-    alert("You've Already Submitted The Quiz...");
-    window.location.href = "score.html";
-    return;
-  }
-
-  const savedProgress = JSON.parse(sessionStorage.getItem("quizProgress"));
-
-  if (savedProgress) {
-    currIndex = savedProgress.currIndex || 0;
-    score = savedProgress.score || 0;
-    timeLeft = savedProgress.timeLeft || 1200;
-    answeredQues =
-      savedProgress.answeredQues || new Array(questions.length).fill(false);
-  } else {
-    timeLeft = 1200;
-  }
-  startTimer();
-  showQuestion();
-};
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  sessionStorage.removeItem("quizProgress");
+  handleForm();
+});
+
+function handleForm() {
   localStorage.removeItem("quizStarted");
   localStorage.setItem("quizFinished", "true");
   localStorage.setItem("score", score);
   localStorage.setItem("totalQues", questions.length);
-  window.location.href = "score.html";
-});
-
+  window.location.href = "thankyou.html";
+}
 optA.addEventListener("click", () => {
   optionClick(optA);
 });

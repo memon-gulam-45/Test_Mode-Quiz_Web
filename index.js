@@ -16,7 +16,6 @@ let invalidMsg = document.querySelector("#invalid-msg");
 startBtn.addEventListener("click", () => {
   welcomePart.classList.add("hidden");
   loginPart.classList.remove("hidden");
-  localStorage.removeItem("quizFinished");
 });
 
 let mode =
@@ -62,7 +61,7 @@ function updateIcons() {
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  if (username.value === "memon_gulam_45" && password.value === "ghm0405") {
+  if (username.value === "admin_0405" && password.value === "admin@0405") {
     invalidMsg.classList.add("hidden");
     console.log("Succesful");
     localStorage.setItem("quizStarted", "true");
