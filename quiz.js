@@ -64,8 +64,12 @@ async function fetchQuestions() {
   showQuestion();
 }
 
-window.onload = function () {
-  if (localStorage.getItem("quizFinished") === "true") {
+window.addEventListener("DOMContentLoaded", () => {
+  const quizFinished = localStorage.getItem("quizFinished");
+
+  console.log(quizFinished);
+
+  if (quizFinished === "true") {
     alert("You've Already Submitted The Quiz...");
     window.location.href = "thankyou.html";
     return;
@@ -88,7 +92,7 @@ window.onload = function () {
   } else {
     fetchQuestions();
   }
-};
+});
 
 const savedData = JSON.parse(localStorage.getItem("quizProgress"));
 
@@ -201,7 +205,10 @@ function handleForm() {
   localStorage.setItem("quizFinished", "true");
   localStorage.setItem("score", score);
   localStorage.setItem("totalQues", questions.length);
-  window.location.href = "thankyou.html";
+
+  setTimeout(() => {
+    window.location.href = "thankyou.html";
+  }, 100);
 }
 optA.addEventListener("click", () => {
   optionClick(optA);
