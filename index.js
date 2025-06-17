@@ -1,6 +1,23 @@
-let welcomePart = document.querySelector("#welcome-part");
-let startBtn = document.querySelector("#start-btn");
-let loginPart = document.querySelector("#login-part");
+let startQuiz = document.querySelector("#start-quiz");
+let register = document.querySelector("#register");
+let startQuizLink = document.querySelector("#start-quiz-link");
+let registerLink = document.querySelector("#register-link");
+let animateIndicator = document.querySelector("#animate-indicator");
+
+startQuizLink.addEventListener("click", () => {
+  startQuiz.classList.remove("hidden");
+  register.classList.add("hidden");
+  animateIndicator.style.left = "0%";
+});
+
+registerLink.addEventListener("click", () => {
+  startQuiz.classList.add("hidden");
+  register.classList.remove("hidden");
+  animateIndicator.style.left = "58.5%";
+});
+
+let whiteCover = document.querySelector("#white-cover");
+let blackCover = document.querySelector("#black-cover");
 
 let dark = document.querySelector("#dark");
 let light = document.querySelector("#light");
@@ -12,11 +29,6 @@ let form = document.querySelector("form");
 let username = document.querySelector("#username");
 let password = document.querySelector("#password");
 let invalidMsg = document.querySelector("#invalid-msg");
-
-startBtn.addEventListener("click", () => {
-  welcomePart.classList.add("hidden");
-  loginPart.classList.remove("hidden");
-});
 
 let mode =
   localStorage.getItem("mode") ||
@@ -32,8 +44,12 @@ updateIcons();
 toggleBtn.addEventListener("click", () => {
   if (mode === "dark") {
     mode = "light";
+    whiteCover.classList.remove("hidden");
+    blackCover.classList.add("hidden");
   } else {
     mode = "dark";
+    whiteCover.classList.add("hidden");
+    blackCover.classList.remove("hidden");
   }
   updateMode();
 });
@@ -58,22 +74,3 @@ function updateIcons() {
     light.classList.add("hidden");
   }
 }
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  if (username.value === "admin_0405" && password.value === "admin@0405") {
-    invalidMsg.classList.add("hidden");
-    console.log("Succesful");
-    localStorage.setItem("quizStarted", "true");
-    window.location.href = "./quiz.html";
-  } else {
-    invalidMsg.classList.remove("hidden");
-    invalidMsg.innerText = "Invalid Credentials";
-  }
-});
-
-window.onload = function () {
-  if (localStorage.getItem("quizStarted") === "true") {
-    window.location.href = "quiz.html";
-  }
-};

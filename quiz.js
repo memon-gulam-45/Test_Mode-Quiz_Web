@@ -15,14 +15,14 @@ function startTimer() {
 
     timerDisplay.innerText = formattedTime;
 
-    timeLeft--;
-    saveProgress();
-
     if (timeLeft <= 0) {
+      timerDisplay.textContent = "00 : 00";
       clearInterval(countDown);
       alert("Time's Up!, Your Quiz Is Submitted");
       handleForm();
+      return;
     }
+    timeLeft--;
   }, 1000);
 }
 
@@ -56,11 +56,10 @@ async function fetchQuestions() {
 
   questions.sort(() => Math.random() - 0.5);
 
-  answeredQues = new Array(questions.length).fill("false");
+  answeredQues = new Array(questions.length).fill(false);
 
   displayQuesNo.innerText = `Question ${currIndex + 1} Of ${questions.length}`;
 
-  startTimer();
   showQuestion();
 }
 
@@ -71,30 +70,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
   if (quizFinished === "true") {
     alert("You've Already Submitted The Quiz...");
-    window.location.href = "thankyou.html";
+    window.location.replace("thankyou.html");
     return;
   }
-
-  const savedProgress = JSON.parse(localStorage.getItem("quizProgress"));
-
-  if (savedProgress && savedProgress.questions) {
-    currIndex = savedProgress.currIndex || 0;
-    score = savedProgress.score || 0;
-    timeLeft = savedProgress.timeLeft || 30;
-    questions = savedProgress.questions || questions;
-    answeredQues =
-      savedProgress.answeredQues || new Array(questions.length).fill("false");
-
-    displayQuesNo.innerText = `Question ${currIndex + 1} Of ${
-      questions.length
-    }`;
-    startTimer();
-  } else {
-    fetchQuestions();
-  }
+  fetchQuestions();
+  startTimer();
 });
-
-const savedData = JSON.parse(localStorage.getItem("quizProgress"));
 
 function showQuestion() {
   let q = questions[currIndex];
@@ -109,7 +90,7 @@ function showQuestion() {
     previousBtn.disabled = true;
   }
 
-  if (answeredQues[currIndex] === "true") {
+  if (answeredQues[currIndex]) {
     disableOptions();
   } else {
     enableOptions();
@@ -142,7 +123,6 @@ function handleNext() {
 
     return;
   }
-  saveProgress();
 }
 
 previousBtn.addEventListener("click", handlePrevious);
@@ -162,7 +142,6 @@ function handlePrevious() {
       previousBtn.disabled = true;
     }
   }
-  saveProgress();
 }
 
 function optionClick(selectedOption) {
@@ -177,22 +156,10 @@ function optionClick(selectedOption) {
     console.log(score);
   }
 
-  answeredQues[currIndex] = "true";
+  answeredQues[currIndex] = true;
   if (currIndex < questions.length - 1) {
     handleNext();
   }
-  saveProgress();
-}
-
-function saveProgress() {
-  const quizState = {
-    currIndex,
-    score,
-    timeLeft,
-    answeredQues,
-    questions,
-  };
-  localStorage.setItem("quizProgress", JSON.stringify(quizState));
 }
 
 form.addEventListener("submit", (e) => {
@@ -207,7 +174,7 @@ function handleForm() {
   localStorage.setItem("totalQues", questions.length);
 
   setTimeout(() => {
-    window.location.href = "thankyou.html";
+    window.location.replace("thankyou.html");
   }, 100);
 }
 optA.addEventListener("click", () => {

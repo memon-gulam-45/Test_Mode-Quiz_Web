@@ -48,13 +48,9 @@
     <script>
       let home = document.querySelector("#home");
       home.addEventListener("click", () => {
-        window.location.href = "index.html";
+        window.location.replace("index.html");
 
-        localStorage.removeItem("quizProgress");
-        localStorage.removeItem("quizFinished");
-        localStorage.removeItem("mode");
-        localStorage.removeItem("score");
-        localStorage.removeItem("totalQues");
+        localStorage.clear();
       });
     </script>
   </body>

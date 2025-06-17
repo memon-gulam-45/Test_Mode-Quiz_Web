@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" id="root" class="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Mode | Registration</title>
+    <script>
+      if (localStorage.getItem("mode") === "dark") {
+        document.querySelector("html").classList.add("dark");
+      }
+    </script>
+    <link rel="stylesheet" href="./output.css" />
+    <link rel="icon" href="./Images/Round-Logo.png" type="image/png" />
+  </head>
+  <body
+    class="bg-white text-black dark:bg-gray-950 dark:text-white font-sans w-screen m-0 p-0 flex flex-col justify-center items-center"
+  >
+    <div
+      class="h-[260vh] my-10 w-4/12 max-xl:w-5/12 max-lg:w-8/12 max-md:w-9/12 max-sm:w-10/12 rounded-2xl shadow-[0_2px_20px] shadow-blue-900 dark:shadow-blue-400 flex flex-col justify-between items-center"
+    >
+      <h3 class="text-3xl max-md:text-2xl max-sm:text-xl mt-8 font-semibold">
+        Registration Form
+      </h3>
+      <form
+        method="post"
+        id="registration-form"
+        class="h-full w-full mt-4 p-4 text-xl max-md:text-lg max-sm:text-sm flex flex-col justify-evenly items-center"
+      >
+        <label for="fullname" class="w-full p-4"
+          >Full Name:
+          <input
+            type="text"
+            name="fullname"
+            id="fullname"
+            placeholder="Name + Father's Name + Surname"
+            class="w-full mt-2 p-2 border-b-2 rounded-xl placeholder:text-gray-600 dark:placeholder:text-gray-300 text-gray-800 bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:text-gray-100 border-blue-600 outline-none hover:bg-gray-100 focus:bg-gray-100 transition duration-200 ease-in-out"
+            required
+        /></label>
+
+        <label for="dob" class="w-full p-4"
+          >Date of Birth:
+          <input
+            type="date"
+            name="dob"
+            id="dob"
+            placeholder="dd-mm-yy"
+            class="w-full mt-2 p-2 border-b-2 rounded-xl placeholder:text-gray-600 dark:placeholder:text-gray-300 text-gray-800 bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:text-gray-100 border-blue-600 outline-none hover:bg-gray-100 focus:bg-gray-100 transition duration-200 ease-in-out"
+            required
+          />
+        </label>
+
+        <label for="mobile-no" class="w-full p-4"
+          >Mobile No. (without Country Code):
+          <input
+            type="tel"
+            name="mobile-no"
+            id="mobile-no"
+            placeholder="e.g. 1234567890"
+            class="w-full mt-2 p-2 border-b-2 rounded-xl placeholder:text-gray-600 dark:placeholder:text-gray-300 text-gray-800 bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:text-gray-100 border-blue-600 outline-none hover:bg-gray-100 focus:bg-gray-100 transition duration-200 ease-in-out"
+            required
+        /></label>
+
+        <label for="internship-domain" class="w-full p-4">
+          Internship Domain:
+          <select
+            id="internship-domain"
+            class="w-full mt-2 p-2 border-b-2 rounded-xl placeholder:text-gray-600 dark:placeholder:text-gray-300 text-gray-800 bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:text-gray-100 border-blue-600 outline-none hover:bg-gray-100 focus:bg-gray-100 transition duration-200 ease-in-out"
+            required
+          >
+            <option id="html-css-js" value="html-css-js">HTML, CSS, JS</option>
+            <option id="react-js" value="react-js">React.js</option>
+            <option id=".net" value=".net">.Net</option>
+            <option id="python" value="python">Python</option>
+            <option id="data-science" value="data-science">Data Science</option>
+            <option id="ai-ml" value="ai-ml">AI/ML</option>
+          </select>
+        </label>
+
+        <label for="course" class="w-full p-4"
+          >Course Name:
+          <input
+            type="text"
+            name="course"
+            id="course"
+            placeholder="e.g. B.Tech"
+            class="w-full mt-2 p-2 border-b-2 rounded-xl placeholder:text-gray-600 dark:placeholder:text-gray-300 text-gray-800 bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:text-gray-100 border-blue-600 outline-none hover:bg-gray-100 focus:bg-gray-100 transition duration-200 ease-in-out"
+            required
+        /></label>
+
+        <label for="branch" class="w-full p-4"
+          >Branch (with Shortform):
+          <input
+            type="text"
+            name="branch"
+            id="branch"
+            placeholder="e.g. Information Technology - IT"
+            class="w-full mt-2 p-2 border-b-2 rounded-xl placeholder:text-gray-600 dark:placeholder:text-gray-300 text-gray-800 bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:text-gray-100 border-blue-600 outline-none hover:bg-gray-100 focus:bg-gray-100 transition duration-200 ease-in-out"
+            required
+        /></label>
+
+        <label for="college" class="w-full p-4"
+          >College (only Shortform):
+          <input
+            type="text"
+            name="college"
+            id="college"
+            placeholder="e.g. GCET"
+            class="w-full mt-2 p-2 border-b-2 rounded-xl placeholder:text-gray-600 dark:placeholder:text-gray-300 text-gray-800 bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:text-gray-100 border-blue-600 outline-none hover:bg-gray-100 focus:bg-gray-100 transition duration-200 ease-in-out"
+            required
+        /></label>
+
+        <label for="university" class="w-full p-4"
+          >University (only Shortform):
+          <input
+            type="text"
+            name="university"
+            id="university"
+            placeholder="e.g. CVMU"
+            class="w-full mt-2 p-2 border-b-2 rounded-xl placeholder:text-gray-600 dark:placeholder:text-gray-300 text-gray-800 bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:text-gray-100 border-blue-600 outline-none hover:bg-gray-100 focus:bg-gray-100 transition duration-200 ease-in-out"
+            required
+        /></label>
+
+        <label for="college-type" class="w-full p-4">
+          College Type:
+          <select
+            id="college-type"
+            class="w-full mt-2 p-2 border-b-2 rounded-xl placeholder:text-gray-600 dark:placeholder:text-gray-300 text-gray-800 bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:text-gray-100 border-blue-600 outline-none hover:bg-gray-100 focus:bg-gray-100 transition duration-200 ease-in-out"
+            required
+          >
+            <option id="gov" value="gov">Grants-In-Aid - GIA</option>
+            <option id="sfi" value="sfi">Self-Financed Institue - SFI</option>
+          </select>
+        </label>
+
+        <label for="city" class="w-full p-4"
+          >City of The College:
+          <input
+            type="text"
+            name="city"
+            id="city"
+            placeholder="e.g. Vallabh Vidhyanagar"
+            class="w-full mt-2 p-2 border-b-2 rounded-xl placeholder:text-gray-600 dark:placeholder:text-gray-300 text-gray-800 bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:text-gray-100 border-blue-600 outline-none hover:bg-gray-100 focus:bg-gray-100 transition duration-200 ease-in-out"
+            required
+        /></label>
+
+        <label for="email" class="w-full p-4"
+          >Email:
+          <input
+            type="text"
+            name="email"
+            id="email"
+            placeholder="Email"
+            class="w-full mt-2 p-2 border-b-2 rounded-xl placeholder:text-gray-600 dark:placeholder:text-gray-300 text-gray-800 bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:text-gray-100 border-blue-600 outline-none hover:bg-gray-100 focus:bg-gray-100 transition duration-200 ease-in-out"
+            required
+        /></label>
+
+        <label for="username" class="w-full p-4"
+          >Username:
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Username"
+            class="w-full mt-2 p-2 border-b-2 rounded-xl placeholder:text-gray-600 dark:placeholder:text-gray-300 text-gray-800 bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:text-gray-100 border-blue-600 outline-none hover:bg-gray-100 focus:bg-gray-100 transition duration-200 ease-in-out"
+            required
+        /></label>
+
+        <label for="password" class="w-full p-4"
+          >Password:
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+            class="w-full mt-2 p-2 border-b-2 rounded-xl placeholder:text-gray-600 dark:placeholder:text-gray-300 text-gray-800 bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:text-gray-100 border-blue-600 outline-none hover:bg-gray-100 focus:bg-gray-100 transition duration-200 ease-in-out"
+            required
+        /></label>
+
+        <label for="confirm-password" class="w-full p-4"
+          >Confirm Password:
+          <input
+            type="password"
+            name="confirm-password"
+            id="confirm-password"
+            placeholder="Confirm Password"
+            class="w-full mt-2 p-2 border-b-2 rounded-xl placeholder:text-gray-600 dark:placeholder:text-gray-300 text-gray-800 bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:text-gray-100 border-blue-600 outline-none hover:bg-gray-100 focus:bg-gray-100 transition duration-200 ease-in-out"
+            required
+        /></label>
+
+        <p id="invalid-msg" class="hidden text-red-600 dark:text-red-300"></p>
+        <button
+          type="submit"
+          id="submit"
+          class="w-10/12 rounded-xl outline-none font-medium mt-4 p-4 bg-transparent shadow-[0_2px_10px] shadow-blue-800 dark:shadow-blue-400 hover:shadow-[0_4px_12px] hover:scale-[1.02] active:scale-98 active:shadow-[0_1px_4px] transition duration-200 ease-in-outrounded-xl cursor-pointer text-black dark:text-white"
+        >
+          Register
+        </button>
+      </form>
+    </div>
+
+    <script type="module" src="register.js"></script>
+  </body>
+</html>
