@@ -26,6 +26,10 @@ function startTimer() {
   }, 1000);
 }
 
+if (sessionStorage.getItem("isLoggedIn") !== "true") {
+  window.location.replace("login.html");
+}
+
 let que = document.querySelector("#question");
 let optA = document.querySelector("#option-a");
 let optB = document.querySelector("#option-b");
@@ -64,15 +68,6 @@ async function fetchQuestions() {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  const quizFinished = localStorage.getItem("quizFinished");
-
-  console.log(quizFinished);
-
-  if (quizFinished === "true") {
-    alert("You've Already Submitted The Quiz...");
-    window.location.replace("thankyou.html");
-    return;
-  }
   fetchQuestions();
   startTimer();
 });
@@ -169,14 +164,53 @@ form.addEventListener("submit", (e) => {
 
 function handleForm() {
   localStorage.removeItem("quizStarted");
-  localStorage.setItem("quizFinished", "true");
   localStorage.setItem("score", score);
   localStorage.setItem("totalQues", questions.length);
 
-  setTimeout(() => {
-    window.location.replace("thankyou.html");
-  }, 100);
+  sessionStorage.clear();
 }
+
+import {
+  addDoc,
+  serverTimestamp,
+  query,
+  where,
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const quizData = {
+    username: localStorage.getItem("username"),
+    score: localStorage.getItem("score"),
+    totalQuestions: localStorage.getItem("totalQues"),
+    quizGiven: true,
+    timeStamp: serverTimestamp(),
+  };
+
+  console.log(quizData);
+  try {
+    const docRef = await addDoc(collection(db, "Attempted-users"), quizData);
+    console.log("Succesful");
+    setTimeout(() => {
+      window.location.replace("thankyou.html");
+    }, 100);
+  } catch (err) {
+    console.log("Error in adding data", err);
+  }
+});
+
+const check = query(
+  collection(db, "Attempted-users"),
+  where("username", "==", localStorage.getItem("username"))
+);
+
+const userData = await getDocs(check);
+
+if (userData.exists) {
+  alert("You have already attempted the quiz.");
+  window.location.replace("index.html");
+}
+
 optA.addEventListener("click", () => {
   optionClick(optA);
 });

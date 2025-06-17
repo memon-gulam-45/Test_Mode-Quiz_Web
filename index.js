@@ -4,6 +4,11 @@ let startQuizLink = document.querySelector("#start-quiz-link");
 let registerLink = document.querySelector("#register-link");
 let animateIndicator = document.querySelector("#animate-indicator");
 
+document.body.addEventListener("click", () => {
+  sessionStorage.clear();
+  localStorage.clear();
+});
+
 startQuizLink.addEventListener("click", () => {
   startQuiz.classList.remove("hidden");
   register.classList.add("hidden");

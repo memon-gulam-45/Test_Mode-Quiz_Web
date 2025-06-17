@@ -44,20 +44,18 @@ registrationForm.addEventListener("submit", async (e) => {
 
   try {
     const check = query(
-      collection(db, "registrations"),
+      collection(db, "Registered-users"),
       where("email", "==", data.email)
     );
     const check2 = query(
-      collection(db, "registrations"),
+      collection(db, "Registered-users"),
       where("username", "==", data.username)
     );
 
-    const [emailSnap, usernameSnap] = await Promise.all([
-      getDocs(check),
-      getDocs(check2),
-    ]);
+    const emailSnap = await getDocs(check);
+    const usernameSnap = await getDocs(check2);
 
-    if (!emailSnap.emoty || !usernameSnap.empty) {
+    if (!emailSnap.empty || !usernameSnap.empty) {
       invalidMsg.textContent = "Email or Username Already Registered";
       invalidMsg.classList.remove("text-red-600", "dark:text-red-300");
       invalidMsg.classList.add("text-green-600", "dark:text-green-300");
@@ -65,11 +63,10 @@ registrationForm.addEventListener("submit", async (e) => {
       return;
     }
 
-    const docRef = await addDoc(collection(db, "registrations"), data);
+    const docRef = await addDoc(collection(db, "Registered-users"), data);
     console.log("Document Written with ID :", docRef.id);
     invalidMsg.textContent = "Registration Succesful!";
     alert("Registration Succesful!");
-    console.log("Document Written with ID :", docRef.id);
     invalidMsg.classList.remove("text-red-600", "dark:text-red-300");
     invalidMsg.classList.add("text-green-600", "dark:text-green-300");
     invalidMsg.classList.remove("hidden");

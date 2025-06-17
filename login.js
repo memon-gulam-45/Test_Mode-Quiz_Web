@@ -12,7 +12,6 @@ const invalidMsg = document.querySelector("#invalid-msg");
 loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  localStorage.setItem("quizStarted", "true");
   const identifier = document
     .querySelector("#login-form #username")
     .value.trim();
@@ -21,7 +20,7 @@ loginForm.addEventListener("submit", async (e) => {
 
   try {
     const usernameQuery = query(
-      collection(db, "registrations"),
+      collection(db, "Registered-users"),
       where("username", "==", identifier)
     );
     const usernameSnapshot = await getDocs(usernameQuery);
@@ -32,7 +31,7 @@ loginForm.addEventListener("submit", async (e) => {
 
     if (!foundUser) {
       const emailQuery = query(
-        collection(db, "registrations"),
+        collection(db, "Registered-users"),
         where("email", "==", identifier)
       );
       const emailSnapshot = await getDocs(emailQuery);
@@ -45,6 +44,9 @@ loginForm.addEventListener("submit", async (e) => {
     if (foundUser) {
       if (foundUser.password == enteredPasword) {
         console.log("Login successful:", foundUser.username || foundUser.email);
+        localStorage.setItem("username", foundUser.username);
+        sessionStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("quizStarted", "true");
         window.location.replace("quiz.html");
       } else {
         invalidMsg.textContent = "Incorrect password.";
@@ -64,16 +66,20 @@ loginForm.addEventListener("submit", async (e) => {
   }
 });
 
+if (sessionStorage.getItem("isLoggedIn") === "true") {
+  window.location.replace("quiz.html");
+}
+
 window.onload = function () {
   if (localStorage.getItem("quizStarted") === "true") {
     window.location.replace("quiz.html");
   }
 };
 
-const inputs = registrationForm.querySelectorAll("input");
+const inputs = loginForm.querySelectorAll("input");
 
-inputs.forEach((input) => {
-  input.addEventListener("input", () => {
+inputs.forEach((inp) => {
+  inp.addEventListener("input", () => {
     invalidMsg.classList.add("hidden");
   });
 });
