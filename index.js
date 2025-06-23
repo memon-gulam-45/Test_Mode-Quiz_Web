@@ -4,11 +4,6 @@ let startQuizLink = document.querySelector("#start-quiz-link");
 let registerLink = document.querySelector("#register-link");
 let animateIndicator = document.querySelector("#animate-indicator");
 
-document.body.addEventListener("click", () => {
-  sessionStorage.clear();
-  localStorage.clear();
-});
-
 startQuizLink.addEventListener("click", () => {
   startQuiz.classList.remove("hidden");
   register.classList.add("hidden");
@@ -29,11 +24,6 @@ let light = document.querySelector("#light");
 let toggleBtn = document.querySelector("#toggle-button");
 
 let root = document.querySelector("#root");
-
-let form = document.querySelector("form");
-let username = document.querySelector("#username");
-let password = document.querySelector("#password");
-let invalidMsg = document.querySelector("#invalid-msg");
 
 let mode =
   localStorage.getItem("mode") ||
@@ -65,9 +55,9 @@ function updateMode() {
   } else {
     root.classList.add("dark");
   }
+  console.log(mode);
   localStorage.setItem("mode", mode);
   updateIcons();
-  console.log(mode);
 }
 
 function updateIcons() {

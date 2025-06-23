@@ -45,8 +45,8 @@ loginForm.addEventListener("submit", async (e) => {
       if (foundUser.password == enteredPasword) {
         console.log("Login successful:", foundUser.username || foundUser.email);
         localStorage.setItem("username", foundUser.username);
+        localStorage.setItem("domain", foundUser.domain);
         sessionStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("quizStarted", "true");
         window.location.replace("quiz.html");
       } else {
         invalidMsg.textContent = "Incorrect password.";
@@ -65,16 +65,6 @@ loginForm.addEventListener("submit", async (e) => {
     invalidMsg.classList.add("text-red-600", "dark:text-red-300");
   }
 });
-
-if (sessionStorage.getItem("isLoggedIn") === "true") {
-  window.location.replace("quiz.html");
-}
-
-window.onload = function () {
-  if (localStorage.getItem("quizStarted") === "true") {
-    window.location.replace("quiz.html");
-  }
-};
 
 const inputs = loginForm.querySelectorAll("input");
 

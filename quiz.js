@@ -1,30 +1,4 @@
 let displayQuesNo = document.querySelector("#display-ques-no");
-let timeLeft = 30;
-
-function startTimer() {
-  const timerDisplay = document.querySelector("#timer");
-
-  const countDown = setInterval(() => {
-    let minutes = Math.floor(timeLeft / 60);
-    let seconds = timeLeft % 60;
-
-    let formattedTime =
-      String(minutes).padStart(2, "0") +
-      " : " +
-      String(seconds).padStart(2, "0");
-
-    timerDisplay.innerText = formattedTime;
-
-    if (timeLeft <= 0) {
-      timerDisplay.textContent = "00 : 00";
-      clearInterval(countDown);
-      alert("Time's Up!, Your Quiz Is Submitted");
-      handleForm();
-      return;
-    }
-    timeLeft--;
-  }, 1000);
-}
 
 if (sessionStorage.getItem("isLoggedIn") !== "true") {
   window.location.replace("login.html");
@@ -51,9 +25,12 @@ const options = [optA, optB, optC, optD];
 let currIndex = 0;
 let answeredQues = [];
 let score = 0;
+let domain = localStorage.getItem("domain");
+
+let timeLeft;
 
 async function fetchQuestions() {
-  const querySnapshot = await getDocs(collection(db, "questions"));
+  const querySnapshot = await getDocs(collection(db, domain));
   querySnapshot.forEach((ques) => {
     questions.push(ques.data());
   });
@@ -67,8 +44,37 @@ async function fetchQuestions() {
   showQuestion();
 }
 
+function startTimer() {
+  fetchQuestions().then(() => {
+    timeLeft = questions.length * 30;
+  });
+
+  const timerDisplay = document.querySelector("#timer");
+
+  const countDown = setInterval(() => {
+    let minutes = Math.floor(timeLeft / 60);
+    let seconds = timeLeft % 60;
+
+    let formattedTime =
+      String(minutes).padStart(2, "0") +
+      " : " +
+      String(seconds).padStart(2, "0");
+
+    timerDisplay.innerText = formattedTime;
+
+    if (timeLeft <= 0) {
+      timerDisplay.textContent = "00 : 00";
+      clearInterval(countDown);
+      alert("Time's Up!, Your Quiz Is Submitted");
+      handleForm();
+      return;
+    }
+    timeLeft--;
+  }, 1000);
+}
+
 window.addEventListener("DOMContentLoaded", () => {
-  fetchQuestions();
+  // fetchQuestions();
   startTimer();
 });
 
@@ -157,19 +163,6 @@ function optionClick(selectedOption) {
   }
 }
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  handleForm();
-});
-
-function handleForm() {
-  localStorage.removeItem("quizStarted");
-  localStorage.setItem("score", score);
-  localStorage.setItem("totalQues", questions.length);
-
-  sessionStorage.clear();
-}
-
 import {
   addDoc,
   serverTimestamp,
@@ -177,12 +170,21 @@ import {
   where,
 } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 
-form.addEventListener("submit", async (e) => {
+form.addEventListener("submit", (e) => {
   e.preventDefault();
+  handleForm();
+});
+
+async function handleForm() {
+  localStorage.removeItem("quizStarted");
+  localStorage.setItem("score", score);
+  localStorage.setItem("totalQues", questions.length);
+
   const quizData = {
     username: localStorage.getItem("username"),
     score: localStorage.getItem("score"),
     totalQuestions: localStorage.getItem("totalQues"),
+    domain: localStorage.getItem("domain"),
     quizGiven: true,
     timeStamp: serverTimestamp(),
   };
@@ -197,7 +199,9 @@ form.addEventListener("submit", async (e) => {
   } catch (err) {
     console.log("Error in adding data", err);
   }
-});
+
+  sessionStorage.clear();
+}
 
 const check = query(
   collection(db, "Attempted-users"),

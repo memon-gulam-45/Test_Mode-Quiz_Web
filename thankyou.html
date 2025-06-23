@@ -37,7 +37,7 @@
 
         <button
           type="button"
-          id="home"
+          id="home-btn"
           class="text-center mt-4 text-black dark:text-white outline-none font-medium p-4 text-lg max-md:text-sm bg-transparent shadow-[0_2px_10px] shadow-blue-800 dark:shadow-blue-400 hover:shadow-[0_4px_12px] hover:scale-101 active:scale-98 active:shadow-[0_1px_4px] transition duration-200 ease-in-out rounded-xl cursor-pointer"
         >
           Go Back to Home
@@ -46,12 +46,11 @@
     </main>
 
     <script>
-      let home = document.querySelector("#home");
-      home.addEventListener("click", () => {
-        window.location.replace("index.html");
-
+      let homeBtn = document.querySelector("#home-btn");
+      homeBtn.addEventListener("click", () => {
         sessionStorage.clear();
         localStorage.clear();
+        window.location.replace("index.html");
       });
     </script>
   </body>

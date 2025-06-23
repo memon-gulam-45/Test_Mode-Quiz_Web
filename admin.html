@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" id="root" class="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Mode</title>
+    <link rel="stylesheet" href="./output.css" />
+    <link rel="icon" href="./Images/Round-Logo.png" type="image/png" />
+  </head>
+  <body
+    class="bg-white text-black dark:bg-gray-950 dark:text-white font-sans h-screen w-screen m-0 p-0"
+  >
+    <header class="h-[12vh] w-full self-start fixed top-0">
+      <nav
+        class="h-full w-full flex justify-between items-center shadow-lg shadow-blue-400 dark:shadow-blue-800"
+      >
+        <div class="w-3/12 h-full flex flex-col justify-center items-center">
+          <img
+            src="Images/White-Cover.png"
+            class="h-8/12 max-md:h-6/12 max-sm:h-5/12"
+            id="white-cover"
+          />
+          <img
+            src="Images/Black-Cover.png"
+            class="h-8/12 max-md:h-6/12 max-sm:h-5/12 hidden"
+            id="black-cover"
+          />
+        </div>
+        <div class="w-3/12 flex justify-evenly items-center">
+          <div
+            class="size-12 max-sm:size-9 flex justify-center items-center bg-white text-black dark:bg-gray-900 dark:text-white rounded-full shadow-[0_3px_10px] shadow-blue-800 dark:shadow-blue-400 hover:shadow-[0_5px_14px] hover:scale-105 active:scale-95 active:shadow-[0_1px_4px] transition duration-200 ease-in-out"
+            id="toggle-button"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="size-5 max-sm:size-4"
+              id="dark"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M7.455 2.004a.75.75 0 0 1 .26.77 7 7 0 0 0 9.958 7.967.75.75 0 0 1 1.067.853A8.5 8.5 0 1 1 6.647 1.921a.75.75 0 0 1 .808.083Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="size-6 max-sm:size-5 hidden"
+              id="light"
+            >
+              <path
+                d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.166a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75ZM17.834 18.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.758 17.303a.75.75 0 0 0-1.061-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.697 7.757a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 0 0-1.061 1.06l1.59 1.591Z"
+              />
+            </svg>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <aside
+      class="h-full w-2/12 bg-white shadow-xl shadow-blue-500 z-10 fixed right-0 hidden"
+      id="sidebar"
+      role="navigation"
+    >
+      <div class="h-full w-full flex justify-evenly items-center">
+        <div
+          class="h-full w-9/12 text-lg font-semibold flex flex-col justify-evenly items-center"
+        >
+          <a
+            href="#dashboard"
+            id="btn1"
+            class="active:text-blue-700 hover:text-blue-800"
+            >Dashboard</a
+          >
+          <a
+            href="#registered-users"
+            id="btn2"
+            class="active:text-blue-700 hover:text-blue-800"
+            >Registered Users</a
+          >
+          <a
+            href="#attempted-users"
+            id="btn3"
+            class="active:text-blue-700 hover:text-blue-800"
+            >Attempted Users</a
+          >
+          <a href="#" id="btn4" class="active:text-blue-700 hover:text-blue-800"
+            >Quiz Questions</a
+          >
+        </div>
+
+        <div class="h-9/12 w-2 rounded-2xl bg-blue-300">
+          <div
+            class="h-3/12 w-full rounded-2xl bg-blue-800 transition-all ease-in-out duration-400"
+            id="animate-line"
+          ></div>
+        </div>
+      </div>
+    </aside>
+
+    <div
+      class="z-20 fixed top-6 right-12 size-12 max-sm:size-9 flex justify-center items-center bg-white text-black dark:bg-gray-900 dark:text-white rounded-full shadow-[0_3px_10px] shadow-blue-800 dark:shadow-blue-400 hover:rotate-180 active:rotate-0 hover:shadow-[0_5px_14px] hover:scale-105 active:scale-95 active:shadow-[0_1px_4px] transition-transform duration-300 ease-in-out"
+      id="nav-btn"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="size-6"
+        id="close-nav"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75H12a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z"
+          clip-rule="evenodd"
+        />
+      </svg>
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="size-6 hidden"
+        id="open-nav"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z"
+          clip-rule="evenodd"
+        />
+      </svg>
+    </div>
+
+    <main
+      class="h-10/12 w-full self-start flex flex-col justify-evenly items-center"
+    >
+      <section id="dashboard" class="h-3/12 flex justify-center items-center">
+        <h3
+          class="text-4xl max-md:text-3xl max-sm:text-2xl text-center font-bold"
+        >
+          Dashboard
+        </h3>
+      </section>
+
+      <section
+        id="registered-users"
+        class="h-3/12 flex flex-col justify-evenly items-center"
+      >
+        <h3
+          class="text-4xl max-md:text-3xl max-sm:text-2xl text-center font-bold"
+        >
+          Registered Users
+        </h3>
+
+        <table class="border border-gray-400 border-collapse w-full text-sm">
+          <tr class="bg-blue-100">
+            <th class="border border-gray-600 px-2 py-1">Sr. No.</th>
+            <th class="border border-gray-600 px-2 py-1">Fullname</th>
+            <th class="border border-gray-600 px-2 py-1">Date of Birth</th>
+            <th class="border border-gray-600 px-2 py-1">Mobile No.</th>
+            <th class="border border-gray-600 px-2 py-1">Email</th>
+            <th class="border border-gray-600 px-2 py-1">Username</th>
+            <th class="border border-gray-600 px-2 py-1">Password</th>
+            <th class="border border-gray-600 px-2 py-1">Selected Domain</th>
+            <th class="border border-gray-600 px-2 py-1">Course</th>
+            <th class="border border-gray-600 px-2 py-1">Branch</th>
+            <th class="border border-gray-600 px-2 py-1">College</th>
+            <th class="border border-gray-600 px-2 py-1">University</th>
+            <th class="border border-gray-600 px-2 py-1">College Type</th>
+            <th class="border border-gray-600 px-2 py-1">City of College</th>
+            <th class="border border-gray-600 px-2 py-1">
+              Time of Registration
+            </th>
+          </tr>
+        </table>
+      </section>
+
+      <section
+        id="attempted-users"
+        class="h-3/12 flex flex-col justify-evenly items-center"
+      >
+        <h3
+          class="text-4xl max-md:text-3xl max-sm:text-2xl text-center font-bold"
+        >
+          Attempted Users
+        </h3>
+
+        <table class="border border-gray-400 border-collapse w-full text-sm">
+          <tr class="bg-blue-100">
+            <th class="border border-gray-600 px-2 py-1">Sr. No.</th>
+            <th class="border border-gray-600 px-2 py-1">Username</th>
+            <th class="border border-gray-600 px-2 py-1">Selected Domain</th>
+            <th class="border border-gray-600 px-2 py-1">Total Questions</th>
+            <th class="border border-gray-600 px-2 py-1">Score</th>
+            <th class="border border-gray-600 px-2 py-1">
+              Time of Registration
+            </th>
+          </tr>
+        </table>
+      </section>
+    </main>
+
+    <script src="admin.js"></script>
+  </body>
+</html>
