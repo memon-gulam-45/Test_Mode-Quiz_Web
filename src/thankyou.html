@@ -10,7 +10,7 @@
       }
     </script>
     <link rel="stylesheet" href="./output.css" />
-    <link rel="icon" href="./Images/Round-Logo.png" type="image/png" />
+    <link rel="icon" href="./../Images/Round-Logo.png" type="image/png" />
   </head>
   <body
     class="bg-white text-black dark:bg-gray-950 dark:text-white font-sans h-screen w-screen flex flex-col justify-evenly items-center"
@@ -30,9 +30,14 @@
         <p
           class="text-2xl p-8 max-lg:text-2xl max-md:text-xl text-center font-semibold"
         >
-          Thank you for completing the quiz! Your responses have been
-          successfully submitted, and our team will review them shortly. You
-          will be notified via WhatsApp or Gmail with the next steps.
+          Thank You For Completing The Quiz! Your Responses Have Been
+          Successfully Submitted, and
+        </p>
+        <p
+          id="scored"
+          class="text-3xl p-8 mb-8 max-lg:text-3xl max-md:text-2xl text-center font-bold"
+        >
+          You've Scored X out of Y...
         </p>
 
         <button
@@ -46,11 +51,17 @@
     </main>
 
     <script>
+      let score = localStorage.getItem("score");
+      let totalQuestions = localStorage.getItem("totalQues");
+      let scoredPara = document.querySelector("#scored");
+
+      scoredPara.textContent = `You've Scored ${score} Out Of ${totalQuestions}...`;
+
       let homeBtn = document.querySelector("#home-btn");
       homeBtn.addEventListener("click", () => {
         sessionStorage.clear();
         localStorage.clear();
-        window.location.replace("index.html");
+        window.location.replace("./../index.html");
       });
     </script>
   </body>

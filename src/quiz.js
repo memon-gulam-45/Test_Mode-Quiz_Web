@@ -30,23 +30,44 @@ let domain = localStorage.getItem("domain");
 let timeLeft;
 
 async function fetchQuestions() {
+  const stored = localStorage.getItem("questions");
+  if (stored) {
+    questions = JSON.parse(stored);
+    answeredQues =
+      JSON.parse(localStorage.getItem("answeredQues")) ||
+      new Array(questions.length).fill(false);
+    currIndex = parseInt(localStorage.getItem("currIndex")) || 0;
+    score = parseInt(localStorage.getItem("score")) || 0;
+    timeLeft =
+      parseInt(localStorage.getItem("timeLeft")) || questions.length * 30;
+
+    displayQuesNo.innerText = `Question ${currIndex + 1} Of ${
+      questions.length
+    }`;
+    showQuestion();
+    return;
+  }
+
   const querySnapshot = await getDocs(collection(db, domain));
   querySnapshot.forEach((ques) => {
     questions.push(ques.data());
   });
-
   questions.sort(() => Math.random() - 0.5);
 
+  localStorage.setItem("questions", JSON.stringify(questions));
   answeredQues = new Array(questions.length).fill(false);
+  localStorage.setItem("answeredQues", JSON.stringify(answeredQues));
+  timeLeft = questions.length * 30;
+  localStorage.setItem("timeLeft", timeLeft);
 
   displayQuesNo.innerText = `Question ${currIndex + 1} Of ${questions.length}`;
-
   showQuestion();
 }
 
 function startTimer() {
   fetchQuestions().then(() => {
-    timeLeft = questions.length * 30;
+    timeLeft =
+      parseInt(localStorage.getItem("timeLeft")) || questions.length * 30;
   });
 
   const timerDisplay = document.querySelector("#timer");
@@ -70,11 +91,11 @@ function startTimer() {
       return;
     }
     timeLeft--;
+    localStorage.setItem("timeLeft", timeLeft);
   }, 1000);
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  // fetchQuestions();
   startTimer();
 });
 
@@ -124,6 +145,7 @@ function handleNext() {
 
     return;
   }
+  localStorage.setItem("currIndex", currIndex);
 }
 
 previousBtn.addEventListener("click", handlePrevious);
@@ -143,6 +165,7 @@ function handlePrevious() {
       previousBtn.disabled = true;
     }
   }
+  localStorage.setItem("currIndex", currIndex);
 }
 
 function optionClick(selectedOption) {
@@ -161,6 +184,10 @@ function optionClick(selectedOption) {
   if (currIndex < questions.length - 1) {
     handleNext();
   }
+
+  localStorage.setItem("score", score);
+  localStorage.setItem("answeredQues", JSON.stringify(answeredQues));
+  localStorage.setItem("currIndex", currIndex);
 }
 
 import {
@@ -176,6 +203,12 @@ form.addEventListener("submit", (e) => {
 });
 
 async function handleForm() {
+  localStorage.removeItem("questions");
+  localStorage.removeItem("score");
+  localStorage.removeItem("currIndex");
+  localStorage.removeItem("answeredQues");
+  localStorage.removeItem("timeLeft");
+
   localStorage.removeItem("quizStarted");
   localStorage.setItem("score", score);
   localStorage.setItem("totalQues", questions.length);
