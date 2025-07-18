@@ -73,3 +73,9 @@ inputs.forEach((inp) => {
     invalidMsg.classList.add("hidden");
   });
 });
+
+const registerLink = document.querySelector("#register-link");
+
+registerLink.addEventListener("click", () => {
+  window.location.replace("register.html");
+});

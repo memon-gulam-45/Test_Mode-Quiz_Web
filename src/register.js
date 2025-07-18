@@ -82,3 +82,9 @@ inputs.forEach((input) => {
     invalidMsg.classList.add("hidden");
   });
 });
+
+const loginLink = document.querySelector("#login-link");
+
+loginLink.addEventListener("click", () => {
+  window.location.replace("login.html");
+});

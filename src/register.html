@@ -16,7 +16,7 @@
     class="bg-white text-black dark:bg-gray-950 dark:text-white font-sans w-screen m-0 p-0 flex flex-col justify-center items-center"
   >
     <div
-      class="h-[220vh] my-10 w-4/12 max-xl:w-5/12 max-lg:w-8/12 max-md:w-9/12 max-sm:w-10/12 rounded-2xl shadow-[0_2px_20px] shadow-blue-900 dark:shadow-blue-400 flex flex-col justify-between items-center"
+      class="h-[160vh] my-10 w-4/12 max-xl:w-5/12 max-lg:w-8/12 max-md:w-9/12 max-sm:w-10/12 rounded-2xl shadow-[0_2px_20px] shadow-blue-900 dark:shadow-blue-400 flex flex-col justify-between items-center"
     >
       <h3 class="text-3xl max-md:text-2xl max-sm:text-xl mt-8 font-semibold">
         Registration Form
@@ -119,8 +119,17 @@
             class="w-full mt-2 p-2 border-b-2 rounded-xl placeholder:text-gray-600 dark:placeholder:text-gray-300 text-gray-800 bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:text-gray-100 border-blue-600 outline-none hover:bg-gray-100 focus:bg-gray-100 transition duration-200 ease-in-out"
             required
         /></label>
-
-        <p id="invalid-msg" class="hidden text-red-600 dark:text-red-300"></p>
+        <p class="text-lg">
+          Already Have Account?
+          <span
+            id="login-link"
+            class="text-blue-700 dark:text-blue-400 cursor-pointer"
+            >Click Here</span
+          >
+        </p>
+        <p id="invalid-msg" class="hidden text-red-600 dark:text-red-300">
+          Error msg
+        </p>
         <button
           type="submit"
           id="submit"
